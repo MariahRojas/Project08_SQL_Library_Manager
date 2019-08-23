@@ -1,0 +1,27 @@
+{
+  "name": "project08_sql_library_manager",
+  "version": "1.0.0",
+  "description": "project08_sql_library_manager",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariahRojas/Project08_SQL_Library_Manager.git"
+  },
+  "author": "Mariah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MariahRojas/Project08_SQL_Library_Manager/issues"
+  },
+  "homepage": "https://github.com/MariahRojas/Project08_SQL_Library_Manager#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-validator": "^6.1.1",
+    "pug": "^2.0.4",
+    "sequelize": "^5.16.0",
+    "sequelize-cli": "^5.5.0",
+    "sqlite3": "^4.1.0"
+  }
+}
