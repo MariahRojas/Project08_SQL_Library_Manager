@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require("path");
 const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
 
 //Initialize App
 const app = express();
@@ -25,7 +26,6 @@ app.get('/', function(req, res){
     res.render('index')
 })
 
-
 //Add Route
 app.get('/books/new', function(req, res){
     res.render('new-book')
@@ -33,12 +33,9 @@ app.get('/books/new', function(req, res){
 
 //Add Submit POST Route
 app.post('/books/new', function(req, res){
-    console.log('Submitted'); //Submiting to the server
+    console.log('Submit') //Submiting to the server
     return;
 })
-
-
-
 
 
 //Start server
