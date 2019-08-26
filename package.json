@@ -4,7 +4,7 @@
   "description": "project08_sql_library_manager",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

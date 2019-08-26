@@ -1,30 +1,21 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const path = require("path");
 
-/* data.json file */
-const { books } = require('./data.json');
+//Initialize App
+const app = express();
 
-/* middleware */
-app.set('view engine', 'pug')
-app.use('/static', express.static('public'))
+//Load view engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
-/* routes */
-app.get('/', function (req, res) {
-
+//Home Route
+app.get('/', function(req, res){
+    res.render('index')
 })
 
 
 
-
-
-
-
-
-
-
-
-
-const portNumber = 3000
-
-app.listen(portNumber)
-console.log('App started on a localhost at port ' + portNumber);
+//Start server
+app.listen(3000, () => {
+    console.log('The application is running on localhost:3000!')
+});
