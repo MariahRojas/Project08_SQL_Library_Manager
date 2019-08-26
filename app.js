@@ -2,12 +2,17 @@ const express = require('express');
 const path = require("path");
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'movies.db'
+});
+
+//Bring in Models
+const Book = require('./models').Book
+
 
 //Initialize App
 const app = express();
-
-//Bring in Models
-let Books = require('./models/books')
 
 /* Middleware */
 //Load view engine
@@ -21,24 +26,43 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //parse application/json
 app.use(bodyParser.json())
 
+
 //Home Route
-app.get('/', function(req, res){
-    res.render('index')
+app.get('/', function (req, res) {
+    Book.findAll()
+        .then((books) => {
+            res.render('index', { books: books })
+        })
 })
 
-//Add Route
-app.get('/books/new', function(req, res){
+//Add New Book Route
+app.get('/books/new', function (req, res) {
     res.render('new-book')
 })
 
 //Add Submit POST Route
-app.post('/books/new', function(req, res){
+app.post('/books/new', function (req, res) {
     console.log('Submit') //Submiting to the server
     return;
 })
 
+//Book Detail Route
+app.get('/books/update/', function (req, res) {
+    res.render('update-book')
+})
 
-//Start server
-app.listen(3000, () => {
-    console.log('The application is running on localhost:3000!')
-});
+/* Define a Model */
+//Books Model
+// class Book extends Sequelize.Model {}
+// Book.init({ //Initialize a model. Call the static class init() method on the model name (Book) to initialize and configure the model:
+//     title: Sequelize.STRING
+// }, { sequelize }); // same as { sequelize: sequelize }
+
+sequelize.sync()
+    .then(() => {
+        console.log('Connection to the database successful!');
+        //Start server
+        app.listen(3000, () => {
+            console.log('The application is running on localhost:3000!')
+        });
+    })

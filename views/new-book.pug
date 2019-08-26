@@ -4,7 +4,7 @@ block content
   head
     title New Book
   h1 New Book
-  form(method='POST', action='/books/new')
+  form(method='POST', action='/books/new/')
     p
       label(for='title') Title
       input#title(name='title' type='text')
@@ -21,7 +21,4 @@ block content
       input.btn.btn-primary(type='submit', value='Create New Book')
     p
       a.button(href='/') Cancel
-    //- p
-    //-   input(type='submit' value='Create New Book')
-    //- p
-    //-   a.button(href='/') Cancel
+      //-   input(type='submit' value='Create New Book')
