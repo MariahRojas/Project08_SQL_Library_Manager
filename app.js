@@ -25,7 +25,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //parse application/json
 app.use(bodyParser.json())
 
-
 //Home Route
 app.get('/', function (req, res) {
     Book.findAll()
@@ -41,21 +40,27 @@ app.get('/books/new', function (req, res) {
 
 //Add Submit POST Route
 app.post('/books/new', function (req, res) {
-    console.log('Submit') //Submiting to the server
-    return;
+    let book = new Book();
+    book.title = req.body.title;
+    book.author = req.body.author;
+    book.genre = req.body.genre;
+    book.year = req.body.year;
+
+    res.redirect('/');
+    // book.create(function(err){
+    //     if(err){
+    //         console.log(err);
+    //         return;
+    //     } else {
+    //         res.redirect('/');
+    //     }
+    // })
 })
 
 //Book Detail Route
 app.get('/books/update/', function (req, res) {
     res.render('update-book')
 })
-
-/* Define a Model */
-//Books Model
-// class Book extends Sequelize.Model {}
-// Book.init({ //Initialize a model. Call the static class init() method on the model name (Book) to initialize and configure the model:
-//     title: Sequelize.STRING
-// }, { sequelize }); // same as { sequelize: sequelize }
 
 /* Handle errors */
 // sets error status when site is not found 
