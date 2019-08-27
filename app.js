@@ -10,7 +10,6 @@ const sequelize = new Sequelize({
 //Bring in Models
 const Book = require('./models').Book
 
-
 //Initialize App
 const app = express();
 
@@ -57,6 +56,23 @@ app.get('/books/update/', function (req, res) {
 // Book.init({ //Initialize a model. Call the static class init() method on the model name (Book) to initialize and configure the model:
 //     title: Sequelize.STRING
 // }, { sequelize }); // same as { sequelize: sequelize }
+
+/* Handle errors */
+// sets error status when site is not found 
+app.use((req, res, next) => {
+    const err = new Error("Not Found");
+    err.status = 404;
+    console.log("We can't find the page you are looking for!")
+    next(err);
+});
+  
+// renders error page
+app.use((err, req, res, next) => {
+    res.locals.error = err;
+    res.status(err.status);
+    res.render('error');
+    console.log(err.status);
+}); 
 
 sequelize.sync()
     .then(() => {

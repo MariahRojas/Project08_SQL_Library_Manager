@@ -1,7 +1,9 @@
 body {
   padding: 10px 50px 50px;
   font: 18px "Garamond", serif;
+  font-family: 'Ubuntu', sans-serif;
 }
+
 
 a {
   color: #019875;

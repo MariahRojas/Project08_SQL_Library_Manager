@@ -1,8 +1,7 @@
-//- extends layout.pug
+extends layout.pug
 
-//- doctype html
-//- head
-//-   title Page Not Found
-//-   link(rel='stylesheet', href='../public/stylesheets/style.css')
-//- h1 Server Error
-//- p Sorry! There was an unexpected error on the server.
+block content
+    h1= `${error.message} | ${error.status}`
+    img.error(src=`/static/images/uKo3MPL.gif`)
+    p Sorry! There was an unexpected error on the server.
+
