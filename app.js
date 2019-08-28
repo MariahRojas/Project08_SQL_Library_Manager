@@ -92,34 +92,33 @@ app.post("/books/new", (req, res) => {
         });
 });
   
-
 //Book Detail Route
 app.get("/books/:id", (req, res) => {
     Book.findByPk(req.params.id)
-      .then(book => {
-        if (!book) {
-          const err = new Error("Book not found");
-          throw err;
-        }
-        res.render("update-book", { book, bookId: req.params.id });
-      })
-      .catch(err => {
-        res.render("error", { err });
-      });
-  });
-  
+        .then(book => {
+            if (!book) {
+                const err = new Error("Book not found");
+                throw err;
+            }
+            res.render("update-book", { book, bookId: req.params.id });
+        })
+        .catch(err => {
+            res.render("error", { err });
+        });
+});
+
 
 //update book info into database
 app.post("/books/:id", (req, res) => {
-Book.findByPk(req.params.id)
-    .then(book => {
-        if (book) {
-        return book
-            .update(req.body)
-            .then(book => {
-            res.redirect("/books");
-            })
-            .catch(err => {
+    Book.findByPk(req.params.id)
+        .then(book => {
+            if (book) {
+            return book
+                .update(req.body)
+                .then(book => {
+                    res.redirect("/books");
+                })
+        .catch(err => {
             if (err.name === "SequelizeValidationError") {
                 res.render("update-book", {
                 errors: err.errors,
@@ -130,14 +129,14 @@ Book.findByPk(req.params.id)
                 res.render("error", { err });
             }
         });
-    } else {
-        const err = new Error("The book doesn't exist");
-        throw err;
+            } else {
+                const err = new Error("The book doesn't exist");
+                throw err;
     }
 })
-.catch(err => {
-    res.render("error", { err });
-});
+    .catch(err => {
+        res.render("error", { err });
+    });
 });
 
 // //Delete Book
